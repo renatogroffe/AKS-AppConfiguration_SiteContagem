@@ -1,0 +1,16 @@
+# ATENÇÃO
+# É necessário habilitar o mecanismo System-assigned managed identity no Virtual Machine Scale Set
+# do cluster AKS:
+# https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vmss#enable-system-assigned-managed-identity-on-an-existing-virtual-machine-scale-set
+# 
+# Ativar também a role com permissão de leitura "App Configuration Data Reader"
+# para a managed identity do Virtual Machine Scale Set utilizado pelo cluster AKS:
+# https://learn.microsoft.com/en-us/azure/azure-app-configuration/howto-integrate-azure-managed-service-identity?tabs=core5x&pivots=framework-dotnet#grant-access-to-app-configuration
+apiVersion: azconfig.io/v1beta1
+kind: AzureAppConfigurationProvider
+metadata:
+  name: appconfigurationprovider-contagem
+spec:
+  endpoint: https://groffeappconfigk8s.azconfig.io
+  target:
+    configMapName: configmap-appconfig-sitecontagem
